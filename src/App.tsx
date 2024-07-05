@@ -1,25 +1,29 @@
 import { useState } from 'react';
 import './App.css';
 import { HackerImage } from './components/HackerImage.tsx';
+import { ByDrorSoft } from './components/ByDrorSoft.tsx';
 
 function App() {
     const [count, setCount] = useState(0);
 
-    return (<>
+    return (
+        <main className={'flex flex-col gap-10 items-center'}>
+            <div className={'flex flex-row justify-center'}>
+
         <HackerImage />
+            </div>
         <h1>Is This Site Safe</h1>
-        <div className="card">
+        <div className= {''}>
             <button onClick={() => setCount((count) => count + 1)}>
                 count is {count}
             </button>
-            <p>
-                Edit <code>src/App.tsx</code> and save to test HMR
-            </p>
+
         </div>
         <p className="read-the-docs">
-            Click on the Vite and React logos to learn more
+        <ByDrorSoft />
         </p>
-    </>);
+        </main>
+     );
 }
 
 export default App;
