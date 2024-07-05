@@ -2,9 +2,11 @@ import { useState } from 'react';
 import './App.css';
 import { HackerImage } from './components/HackerImage.tsx';
 import { ByDrorSoft } from './components/ByDrorSoft.tsx';
+import { AppButton } from './components/AppButton.tsx';
+import { AppTextInput } from './components/AppTextInput.tsx';
 
 function App() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState('');
 
     return (<main className={'flex flex-col gap-10 items-center'}>
 
@@ -12,9 +14,14 @@ function App() {
 
         <h1>Is This Site Safe</h1>
         <div className={''}>
-            <button onClick={() => setCount((count) => count + 1)}>
+            <AppTextInput value={count}
+                          label={'Enter a URL'}
+                          id={'url'}
+                          onChange={(ev)=> setCount(ev.target.value)}/>
+
+            <AppButton className={'bg-blue-600'} onClick={()=>{} }>
                 count is {count}
-            </button>
+            </AppButton>
 
         </div>
         <p className="read-the-docs">
