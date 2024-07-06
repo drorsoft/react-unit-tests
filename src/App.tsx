@@ -4,19 +4,29 @@ import { HackerImage } from './components/HackerImage.tsx';
 import { ByDrorSoft } from './components/ByDrorSoft.tsx';
 import { AppButton } from './components/AppButton.tsx';
 import { AppTextInput } from './components/AppTextInput.tsx';
-import { checkURLData } from './api/checkURLData.ts';
+import { checkDomainData } from './api/checkDomainData.ts';
 import { Results } from './components/Results.tsx';
+import { isValidUrl } from './utils/isValidUrl.ts';
+import { getDomainFromUrl } from './utils/getDomailFromUrl.ts';
 
 function App() {
     const [url, setUrl] = useState('cdn.freechatgpt.cloud');
-    const [resultData, setResultData] = useState<{domain: string, isSafe: boolean} | null>(null  );
-
+    const [resultData, setResultData] = useState<{ domain: string, isSafe: boolean } | null>(null);
+    const [showUrlNotValidError, setshowUrlNotValidError] = useState(true);
     const checkUrl = async () => {
-        const response = await checkURLData(url);
-        setResultData({domain: url, isSafe: !response.isMalicious
-        })
-        console.log(response)
-    }
+        setResultData(null);
+        if (!isValidUrl(url)) {
+            setshowUrlNotValidError(true);
+            return;
+        }
+        const domain = getDomainFromUrl(url);
+        const response = await checkDomainData(domain);
+        setResultData({
+            domain: domain,
+            isSafe: !response.isMalicious,
+        });
+        console.log(response);
+    };
 
     return (<main className={'flex flex-col gap-10 items-center mb-10'}>
         <HackerImage />
@@ -26,10 +36,18 @@ function App() {
                           className={'w-full h-12'}
                           placeholder={'Enter a URL'}
                           id={'url'}
-                          onChange={(ev) => setUrl(ev.target.value)} />
+                          onChange={(ev) => {
+                              setshowUrlNotValidError(false);
+                              setUrl(ev.target.value);
+                          }} />
 
-
+            <div className={'h-10 flex flex-col justify-end'}>
+                {showUrlNotValidError && <p className={'text-red-500 font-bold'}>URL is not valid</p>}
+            </div>
+            <Results results={resultData} />
         </div>
+
+
         <div className={' w-40  '}>
             <AppButton className={'bg-blue-600 '} onClick={() => {
                 checkUrl().then();
@@ -37,7 +55,7 @@ function App() {
                 Check URL
             </AppButton>
         </div>
-        <Results results={resultData} />
+
 
         <div className="read-the-docs">
             <ByDrorSoft />

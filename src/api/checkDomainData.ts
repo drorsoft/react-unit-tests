@@ -1,4 +1,4 @@
-export const checkURLData = async (domain: string) => {
+export const checkDomainData = async (domain: string) => {
     const response = await fetch(`https://dangerous.domains/api/v1/${domain}`, {
         method: 'GET',
 
