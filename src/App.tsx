@@ -4,9 +4,15 @@ import { HackerImage } from './components/HackerImage.tsx';
 import { ByDrorSoft } from './components/ByDrorSoft.tsx';
 import { AppButton } from './components/AppButton.tsx';
 import { AppTextInput } from './components/AppTextInput.tsx';
+import { checkURLData } from './api/checkURLData.ts';
 
 function App() {
-    const [url, setUrl] = useState('');
+    const [url, setUrl] = useState('https://drive.google.com/drive/my-drive');
+
+    const checkUrl = async () => {
+        const response = await checkURLData(url);
+        console.log(response)
+    }
 
     return (<main className={'flex flex-col gap-10 items-center'}>
         <HackerImage />
@@ -22,13 +28,14 @@ function App() {
         </div>
         <div className={' w-40  '}>
             <AppButton className={'bg-blue-600 '} onClick={() => {
+                checkUrl().then();
             }}>
                 Check URL
             </AppButton>
         </div>
-        <p className="read-the-docs">
+        <div className="read-the-docs">
             <ByDrorSoft />
-        </p>
+        </div>
     </main>);
 }
 
