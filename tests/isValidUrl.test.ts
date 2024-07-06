@@ -18,8 +18,12 @@ describe('Is valid Url', () => {
             const url = '';
             expect(isValidUrl(url)).toBe(false);
         });
-        it('should throw if gets a function', () => {
+        it('should throw if gets an object', () => {
             const url = { url: 'www.example.com' };
+            expect(() => isValidUrl(url)).toThrow();
+        });
+        it('should throw if gets a function', () => {
+            const url = () => ({ url: 'www.example.com' });
             expect(() => isValidUrl(url)).toThrow();
         });
 
