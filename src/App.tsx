@@ -12,11 +12,11 @@ import { getDomainFromUrl } from './utils/getDomailFromUrl.ts';
 function App() {
     const [url, setUrl] = useState('cdn.freechatgpt.cloud');
     const [resultData, setResultData] = useState<{ domain: string, isSafe: boolean } | null>(null);
-    const [showUrlNotValidError, setshowUrlNotValidError] = useState(true);
+    const [showUrlNotValidError, setShowUrlNotValidError] = useState(true);
     const checkUrl = async () => {
         setResultData(null);
         if (!isValidUrl(url)) {
-            setshowUrlNotValidError(true);
+            setShowUrlNotValidError(true);
             return;
         }
         const domain = getDomainFromUrl(url);
@@ -37,14 +37,17 @@ function App() {
                           placeholder={'Enter a URL'}
                           id={'url'}
                           onChange={(ev) => {
-                              setshowUrlNotValidError(false);
+                              setShowUrlNotValidError(false);
                               setUrl(ev.target.value);
                           }} />
 
             <div className={'h-10 flex flex-col justify-end'}>
                 {showUrlNotValidError && <p className={'text-red-500 font-bold'}>URL is not valid</p>}
             </div>
+            <div className={'h-10'}>
+
             <Results results={resultData} />
+            </div>
         </div>
 
 

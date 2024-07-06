@@ -3,4 +3,11 @@
 
 This service is using 
 
-https://urlhaus-api.abuse.ch/#urls-recent
+
+
+# Some unsafe sites examples
+
+https://taplinkk.ru/instagram
+https://airusdt.net/prize
+https://bot.ngo/home
+https://robarfacebook.com/login
