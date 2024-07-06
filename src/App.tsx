@@ -25,7 +25,7 @@ function App() {
             domain: domain,
             isSafe: !response.isMalicious,
         });
-        console.log(response);
+       
     };
 
     return (<main className={'flex flex-col gap-10 items-center mb-10'}>
