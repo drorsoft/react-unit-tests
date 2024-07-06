@@ -1,12 +1,7 @@
+export const checkURLData = async (domain: string) => {
+    const response = await fetch(`https://dangerous.domains/api/v1/${domain}`, {
+        method: 'GET',
 
-
-export const checkURLData = async (url: string) => {
-    const response = await fetch('https://apps-links.web.app/api/checkUrl', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ url }),
     });
-   return await response.text();
+    return  response.json();
 };

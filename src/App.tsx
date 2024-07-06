@@ -5,16 +5,20 @@ import { ByDrorSoft } from './components/ByDrorSoft.tsx';
 import { AppButton } from './components/AppButton.tsx';
 import { AppTextInput } from './components/AppTextInput.tsx';
 import { checkURLData } from './api/checkURLData.ts';
+import { Results } from './components/Results.tsx';
 
 function App() {
-    const [url, setUrl] = useState('https://drive.google.com/drive/my-drive');
+    const [url, setUrl] = useState('cdn.freechatgpt.cloud');
+    const [resultData, setResultData] = useState<{domain: string, isSafe: boolean} | null>(null  );
 
     const checkUrl = async () => {
         const response = await checkURLData(url);
+        setResultData({domain: url, isSafe: !response.isMalicious
+        })
         console.log(response)
     }
 
-    return (<main className={'flex flex-col gap-10 items-center'}>
+    return (<main className={'flex flex-col gap-10 items-center mb-10'}>
         <HackerImage />
         <h1>Is This Site Safe</h1>
         <div className={'w-96'}>
@@ -33,6 +37,8 @@ function App() {
                 Check URL
             </AppButton>
         </div>
+        <Results results={resultData} />
+
         <div className="read-the-docs">
             <ByDrorSoft />
         </div>
