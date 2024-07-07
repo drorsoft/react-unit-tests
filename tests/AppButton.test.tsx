@@ -14,5 +14,14 @@ describe('App button', () => {
         fireEvent.click(screen.getByRole('button'));
         expect(onClickMock).toHaveBeenCalled();
     });
+    it('doesnt fire click event if disabled', async () => {
+        const onClickMock = vi.fn(() => {
+        });
+        render(<AppButton disabled={true} onClick={() => onClickMock()}>
+            Click me
+        </AppButton>);
+        fireEvent.click(screen.getByRole('button'));
+        expect(onClickMock).not.toHaveBeenCalled();
+    });
 });
 
