@@ -1,18 +1,19 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { beforeEach, describe, expect, test, vi, Mock } from 'vitest';
 import { checkDomainData } from '../../src/api/checkDomainData.js';
 import App from '../../src/App.js';
 
 
 vi.mock('../../src/api/checkDomainData.js');
-describe('App', () => {
+
+describe('Application', () => {
     beforeEach(() => {
-        (checkDomainData as any).mockClear();
+        (checkDomainData as Mock).mockClear();
     });
     test('App', async () => {
 
-        (checkDomainData as any).mockResolvedValue({
+        (checkDomainData as Mock).mockResolvedValue({
             isMalicious: false,
         });
 
@@ -23,12 +24,10 @@ describe('App', () => {
         });
         fireEvent.click(screen.getByText('Check URL'));
 
-
         await waitFor(() => {
             expect(screen.getByText('safeurl.com')).not.toBe(null);
             expect(screen.getByText('Is Safe')).not.toBe(null);
         });
     });
-
 
 });
