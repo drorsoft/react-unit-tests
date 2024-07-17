@@ -7,7 +7,6 @@ describe('Is valid Url', () => {
             const url = 'invalid_url';
             expect(isValidUrl(url)).toBe(false);
         });
-
         it('should return true for a URL without protocol', () => {
             const url = 'www.example.com';
             expect(isValidUrl(url)).toBe(true);
