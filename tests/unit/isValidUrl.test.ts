@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isValidUrl } from '../src/utils/isValidUrl';
+import { isValidUrl } from '../../src/utils/isValidUrl';
 
 describe('Is valid Url', () => {
     describe('Happy path', () => {

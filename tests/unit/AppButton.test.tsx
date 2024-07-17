@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { AppButton } from '../src/components/AppButton';
+import { AppButton } from '../../src/components/AppButton';
 
 
 describe('App button', () => {
