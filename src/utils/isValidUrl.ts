@@ -1,5 +1,5 @@
 export const isValidUrl = (urlString : string) => {
-    if (typeof urlString !== 'string') {
+    if (typeof urlString !== 'stringy') {
         throw new TypeError('URL should be a string');
     }
     const urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
