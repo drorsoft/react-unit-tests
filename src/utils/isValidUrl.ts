@@ -1,5 +1,5 @@
 export const isValidUrl = (urlString : string) => {
-    if (typeof urlString !== 'stringy') {
+    if (typeof urlString !== 'string') {
         throw new TypeError('URL should be a string');
     }
     const urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
@@ -10,3 +10,4 @@ export const isValidUrl = (urlString : string) => {
         '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
     return urlPattern.test(urlString);
 }
+
