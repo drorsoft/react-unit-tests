@@ -1,17 +1,33 @@
-import { useState } from 'react';
-import { expect, it,describe } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
- const Count = () => {
-  const [count, setCount] = useState(0)
-  return <button onClick={()=>setCount(p=>p+1)}>{"Count " + count}</button>
- }
+import { beforeEach, describe, expect, test, vi, Mock } from 'vitest';
+import { checkDomainData } from '../../src/api/checkDomainData.js';
+import App from '../../src/App.js';
 
-describe('Counter', () => {
-    it ("show Hello", ()=> {
-      render (<Count/>)
-      const hello = screen.queryByTestId("Hello")
-      expect(hello).toBeTruthy()
-    })
+
+vi.mock('../../src/api/checkDomainData.js');
+
+describe('Application', () => {
+    beforeEach(() => {
+        (checkDomainData as Mock).mockClear();
+    });
+    test('App', async () => {
+
+        (checkDomainData as Mock).mockResolvedValue({
+            isMalicious: false,
+        });
+
+        render(<App />);
+
+        fireEvent.change(screen.getByPlaceholderText('Enter a URL'), {
+            target: { value: 'www.safeurl.com' },
+        });
+        fireEvent.click(screen.getByText('Check URL'));
+
+        await waitFor(() => {
+            expect(screen.getByText('safeurl.com')).not.toBe(null);
+            expect(screen.getByText('Is Safe')).not.toBe(null);
+        });
+    });
+
 });
-
