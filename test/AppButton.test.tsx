@@ -1,11 +1,15 @@
-import { describe, expect, it, vi } from 'vitest';
-import {  render, screen } from '@testing-library/react';
+import { useState } from 'react';
+import { expect, it,describe } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 
- const Hello = () => <span className='text-red-400'>Goodby</span>
+ const Count = () => {
+  const [count, setCount] = useState(0)
+  return <button onClick={()=>setCount(p=>p+1)}>{"Count " + count}</button>
+ }
 
-describe('Shows text', () => {
+describe('Counter', () => {
     it ("show Hello", ()=> {
-      render (<Hello/>)
+      render (<Count/>)
       const hello = screen.queryByTestId("Hello")
       expect(hello).toBeTruthy()
     })
