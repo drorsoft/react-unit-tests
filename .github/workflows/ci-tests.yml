@@ -25,4 +25,6 @@ jobs:
           cache: 'npm'
           cache-dependency-path: './'
       - run: npm ci --dev-dependency
+      - run: npm run typecheck
       - run: npm test
+      
